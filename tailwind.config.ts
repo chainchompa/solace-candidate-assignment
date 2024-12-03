@@ -8,6 +8,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        solaceGreen: "#285E50"
+      },
+      fontFamily: {
+        mollieGlaston: ['Mollie Glaston'],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
