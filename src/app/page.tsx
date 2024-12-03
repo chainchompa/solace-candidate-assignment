@@ -9,7 +9,7 @@ interface Advocate {
   city: string;
   degree: string;
   specialties: string[];
-  yearsOfExperience: string;
+  yearsOfExperience: number;
   phoneNumber: string;
 }
 
@@ -37,8 +37,7 @@ export default function Home() {
         advocate.lastName.includes(newSearchTerm) ||
         advocate.city.includes(newSearchTerm) ||
         advocate.degree.includes(newSearchTerm) ||
-        advocate.specialties.includes(newSearchTerm) ||
-        advocate.yearsOfExperience.includes(newSearchTerm)
+        advocate.specialties.includes(newSearchTerm)
       );
     });
 
@@ -66,13 +65,15 @@ export default function Home() {
       <br />
       <table>
         <thead>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>City</th>
-          <th>Degree</th>
-          <th>Specialties</th>
-          <th>Years of Experience</th>
-          <th>Phone Number</th>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>City</th>
+            <th>Degree</th>
+            <th>Specialties</th>
+            <th>Years of Experience</th>
+            <th>Phone Number</th>
+          </tr>
         </thead>
         <tbody>
           {filteredAdvocates.map((advocate) => {
@@ -83,8 +84,8 @@ export default function Home() {
                 <td>{advocate.city}</td>
                 <td>{advocate.degree}</td>
                 <td>
-                  {advocate.specialties.map((specialty, index) => (
-                    <div key={index}>{specialty}</div>
+                  {advocate.specialties.map((specialty) => (
+                    <div key={specialty}>{specialty}</div>
                   ))}
                 </td>
                 <td>{advocate.yearsOfExperience}</td>
