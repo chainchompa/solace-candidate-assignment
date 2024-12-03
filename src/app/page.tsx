@@ -28,14 +28,19 @@ export default function Home() {
   const [sortField, setSortField] = useState<SortField>("firstName");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/advocates")
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) throw new Error('Failed to fetch advocates');
+        return response.json();
+      })
       .then((jsonResponse) => {
         setAdvocates(jsonResponse.data);
         setFilteredAdvocates(jsonResponse.data);
       })
+      .catch((err) => setError(err.message))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -88,6 +93,12 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gray-50 px-4 sm:px-6 lg:px-8 py-8">
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          {error}
+        </div>
+      )}
+
       <h1 className="text-3xl font-mollieGlaston text-solaceGreen mb-8">
         Solace Associates
       </h1>
